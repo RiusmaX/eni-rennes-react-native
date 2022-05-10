@@ -2,15 +2,17 @@ import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import Input from './Input'
 import Button from '../Button'
+import { login } from '../../services/Api'
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({
-    identifier: '',
-    password: ''
+    identifier: 'test@test.fr',
+    password: 'testtest'
   })
 
-  const handlePress = () => {
-    console.log('Bouton pressé !')
+  const handlePress = async () => {
+    const result = await login(credentials)
+    console.log(JSON.stringify(result, null, 2))
   }
 
   return (
