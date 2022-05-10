@@ -12,7 +12,9 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: 'lightgrey',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5
   },
   textInput: {
     flex: 6,
