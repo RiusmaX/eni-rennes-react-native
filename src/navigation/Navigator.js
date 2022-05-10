@@ -16,7 +16,11 @@ const AuthNavigator = createNativeStackNavigator()
 
 const AuthNavigation = () => {
   return (
-    <AuthNavigator.Navigator>
+    <AuthNavigator.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+    >
       <AuthNavigator.Group>
         <AuthNavigator.Screen name='Login' component={LoginScreen} />
         <AuthNavigator.Screen name='Register' component={RegisterScreen} />
