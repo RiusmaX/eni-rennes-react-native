@@ -6,6 +6,7 @@ import styles from './styles/LoginScreenStyle'
 import LoginForm from '../components/form/LoginForm'
 import { useAuth } from '../contexts/AuthContext'
 
+// = props.navigation
 const LoginScreen = ({ navigation }) => {
   const { loginUser } = useAuth()
 
