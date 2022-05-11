@@ -10,12 +10,8 @@ const api = axios.create({
 })
 
 const login = async (credentials) => {
-  try {
-    const response = await api.post('/auth/local', credentials)
-    return response.data
-  } catch (error) {
-    console.error(error)
-  }
+  const response = await api.post('/auth/local', credentials)
+  return response.data
 }
 
 const register = async (userData) => {

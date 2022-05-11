@@ -54,7 +54,7 @@ const ContextFactory = (dispatch) => ({
     } catch (error) {
       dispatch({
         type: actionTypes.ERROR,
-        data: { error } // = { error: error }
+        data: { error: error.message }
       })
     }
   },

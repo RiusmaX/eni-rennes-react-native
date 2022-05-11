@@ -11,5 +11,11 @@ export default StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     marginVertical: 25
+  },
+  error: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'red'
   }
 })

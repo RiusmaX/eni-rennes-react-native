@@ -8,10 +8,11 @@ import { useAuth } from '../contexts/AuthContext'
 
 // = props.navigation
 const LoginScreen = ({ navigation }) => {
-  const { loginUser } = useAuth()
+  // Extraction profonde (deep extraction)
+  const { loginUser, state: { error } } = useAuth()
 
   const [credentials, setCredentials] = useState({
-    identifier: 'test@test.fr',
+    identifier: 'tes5t@test.fr',
     password: 'testtest'
   })
 
@@ -27,6 +28,7 @@ const LoginScreen = ({ navigation }) => {
         setCredentials={setCredentials}
         onSubmit={handleSubmit}
       />
+      {error && <Text style={globalStyles.error}>Identifiant ou mot de passe invalide</Text>}
       <TouchableOpacity onPress={() => navigation.navigate('Register')}>
         <Text style={globalStyles.pressableLink}>Je n'ai pas de compte</Text>
       </TouchableOpacity>
