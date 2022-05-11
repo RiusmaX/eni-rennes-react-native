@@ -1,11 +1,12 @@
 import React, { createContext, useReducer, useContext, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { login } from '../services/Api'
+import { login, register } from '../services/Api'
 
 const AuthContext = createContext()
 
 const actionTypes = {
   LOGIN: 'LOGIN',
+  REGISTER: 'REGISTER',
   ERROR: 'ERROR',
   LOGOUT: 'LOGOUT',
   LOADING: 'LOADING'
@@ -20,6 +21,7 @@ const initialState = {
 
 const AuthReducer = (state, action) => {
   switch (action.type) {
+    case actionTypes.REGISTER:
     case actionTypes.LOGIN:
       return {
         ...initialState, token: action.data.token, user: action.data.user
@@ -46,6 +48,22 @@ const ContextFactory = (dispatch) => ({
       if (data.user && data.jwt) {
         dispatch({
           type: actionTypes.LOGIN,
+          data: { user: data.user, token: data.jwt }
+        })
+      }
+    } catch (error) {
+      dispatch({
+        type: actionTypes.ERROR,
+        data: { error } // = { error: error }
+      })
+    }
+  },
+  registerUser: async (userData) => {
+    try {
+      const data = await register(userData)
+      if (data.user && data.jwt) {
+        dispatch({
+          type: actionTypes.REGISTER,
           data: { user: data.user, token: data.jwt }
         })
       }

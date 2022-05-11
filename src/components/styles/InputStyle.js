@@ -10,6 +10,8 @@ export default StyleSheet.create({
   },
   iconContainer: {
     flex: 1,
+    borderRightWidth: 1,
+    marginRight: 1,
     backgroundColor: 'lightgrey',
     alignItems: 'center',
     justifyContent: 'center',
@@ -18,7 +20,8 @@ export default StyleSheet.create({
   },
   textInput: {
     flex: 6,
-    height: 40,
-    padding: 10
+    // height: 40,
+    padding: 10,
+    fontSize: 16
   }
 })

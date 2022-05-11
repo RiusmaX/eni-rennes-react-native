@@ -1,9 +1,19 @@
 import React from 'react'
-import { Button } from 'react-native'
+import { Text, Pressable } from 'react-native'
+import styles from './styles/ButtonStyle'
 
 const CustomButton = (props) => {
+  const { onPress, title = 'Save' } = props
   return (
-    <Button {...props} />
+    <Pressable
+      android_ripple={{
+        color: 'lightgrey',
+      }}
+      style={styles.button}
+      onPress={onPress}
+    >
+      <Text style={styles.text}>{title}</Text>
+    </Pressable>
   )
 }
 

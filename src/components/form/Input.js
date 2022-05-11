@@ -10,7 +10,7 @@ const CustomInput = (props) => {
         props.icon &&
         (
           <View style={styles.iconContainer}>
-            <Icon name={props.icon} size={20} color='black' />
+            <Icon name={props.icon} size={20} color='grey' />
           </View>
         )
       }

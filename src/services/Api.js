@@ -18,6 +18,16 @@ const login = async (credentials) => {
   }
 }
 
+const register = async (userData) => {
+  try {
+    const response = await api.post('/auth/local/register', userData)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export {
-  login
+  login,
+  register
 }

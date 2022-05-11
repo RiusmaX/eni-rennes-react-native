@@ -28,7 +28,7 @@ const LoginScreen = ({ navigation }) => {
         onSubmit={handleSubmit}
       />
       <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-        <Text>Je n'ai pas de compte</Text>
+        <Text style={globalStyles.pressableLink}>Je n'ai pas de compte</Text>
       </TouchableOpacity>
     </View>
   )

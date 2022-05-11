@@ -5,6 +5,11 @@ export default StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     textAlign: 'center',
+    marginVertical: 35
+  },
+  pressableLink: {
+    fontSize: 16,
+    textAlign: 'center',
     marginVertical: 25
   }
 })
