@@ -14,25 +14,24 @@ import {
   useColorScheme
 } from 'react-native'
 
-import {
-  Colors
-} from 'react-native/Libraries/NewAppScreen'
-import Clock from './components/ClockFunction'
+// import {
+//   Colors
+// } from 'react-native/Libraries/NewAppScreen'
+// import Clock from './components/ClockFunction'
+import { AuthProvider } from './contexts/AuthContext'
 import MainNavigation from './navigation/Navigator'
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark'
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter
-  }
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NavigationContainer>
-        <MainNavigation />
-      </NavigationContainer>
+      <AuthProvider>
+        <NavigationContainer>
+          <MainNavigation />
+        </NavigationContainer>
+      </AuthProvider>
     </SafeAreaView>
   )
 }

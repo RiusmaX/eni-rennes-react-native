@@ -1,20 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text } from 'react-native'
 import Input from './Input'
 import Button from '../Button'
-import { login } from '../../services/Api'
 
-const LoginForm = () => {
-  const [credentials, setCredentials] = useState({
-    identifier: 'test@test.fr',
-    password: 'testtest'
-  })
-
-  const handlePress = async () => {
-    const result = await login(credentials)
-    console.log(JSON.stringify(result, null, 2))
-  }
-
+const LoginForm = ({ credentials, setCredentials, onSubmit }) => {
   return (
     <View>
       <Input
@@ -28,10 +17,7 @@ const LoginForm = () => {
         onChangeText={(text) => setCredentials({ ...credentials, password: text })}
         value={credentials.password}
       />
-      <Button title='Se connecter' onPress={handlePress} />
-      <View>
-        <Text>{JSON.stringify(credentials, null, 2)}</Text>
-      </View>
+      <Button title='Se connecter' onPress={onSubmit} />
     </View>
   )
 }

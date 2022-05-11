@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -7,6 +7,8 @@ import HomeScreen from '../screens/HomeScreen'
 import RestaurantsScreen from '../screens/RestaurantsScreen'
 import LoginScreen from '../screens/LoginScreen'
 import RegisterScreen from '../screens/RegisterScreen'
+// import CounterScreen from '../screens/CounterScreen'
+import { useAuth } from '../contexts/AuthContext'
 
 // On instancie la navigation par onglets
 const TabNavigator = createBottomTabNavigator()
@@ -22,6 +24,7 @@ const AuthNavigation = () => {
       }}
     >
       <AuthNavigator.Group>
+        {/* <AuthNavigator.Screen name='Counter' component={CounterScreen} /> */}
         <AuthNavigator.Screen name='Login' component={LoginScreen} />
         <AuthNavigator.Screen name='Register' component={RegisterScreen} />
       </AuthNavigator.Group>
@@ -61,9 +64,9 @@ const MainNavigation = () => {
 }
 
 const Navigator = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const { state } = useAuth()
 
-  return isLoggedIn ? <MainNavigation /> : <AuthNavigation />
+  return (state.user && state.token) ? <MainNavigation /> : <AuthNavigation />
 
   // if (isLoggedIn) {
   //   return <MainNavigation />
