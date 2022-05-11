@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import globalStyles from '../theme/Styles'
 import styles from './styles/LoginScreenStyle'
 
 import LoginForm from '../components/form/LoginForm'
 import { useAuth } from '../contexts/AuthContext'
+import Images from '../images/Images'
 
 // = props.navigation
 const LoginScreen = ({ navigation }) => {
@@ -22,6 +23,7 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Image source={Images.logo} style={styles.image} />
       <Text style={globalStyles.heading}>Se connecter</Text>
       <LoginForm
         credentials={credentials}

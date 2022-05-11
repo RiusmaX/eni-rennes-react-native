@@ -109,12 +109,15 @@ const AuthProvider = ({ children }) => {
   // Récupération de l'état d'authenfication sauvegardé
   useEffect(() => {
     const loadStoredState = async () => {
+      dispatch({ type: actionTypes.LOADING })
       const storedState = await rehydrateAuth()
       if (storedState) {
         dispatch({
           type: actionTypes.LOGIN,
           data: { user: storedState.user, token: storedState.token }
         })
+      } else {
+        dispatch({ type: actionTypes.LOGOUT })
       }
     }
     loadStoredState()

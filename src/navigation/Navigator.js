@@ -9,6 +9,7 @@ import LoginScreen from '../screens/LoginScreen'
 import RegisterScreen from '../screens/RegisterScreen'
 // import CounterScreen from '../screens/CounterScreen'
 import { useAuth } from '../contexts/AuthContext'
+import LoadingScreen from '../screens/LoadingScreen'
 
 // On instancie la navigation par onglets
 const TabNavigator = createBottomTabNavigator()
@@ -24,7 +25,7 @@ const AuthNavigation = () => {
       }}
     >
       <AuthNavigator.Group>
-        {/* <AuthNavigator.Screen name='Counter' component={CounterScreen} /> */}
+        {/* <AuthNavigator.Screen name='Loading' component={LoadingScreen} /> */}
         <AuthNavigator.Screen name='Login' component={LoginScreen} />
         <AuthNavigator.Screen name='Register' component={RegisterScreen} />
       </AuthNavigator.Group>
@@ -64,9 +65,13 @@ const MainNavigation = () => {
 }
 
 const Navigator = () => {
-  const { state } = useAuth()
+  const { state: { loading, user, token } } = useAuth()
 
-  return (state.user && state.token) ? <MainNavigation /> : <AuthNavigation />
+  if (loading) {
+    return <LoadingScreen />
+  } else {
+    return (user && token) ? <MainNavigation /> : <AuthNavigation />
+  }
 
   // if (isLoggedIn) {
   //   return <MainNavigation />
