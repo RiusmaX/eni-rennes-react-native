@@ -6,7 +6,7 @@ import styles from './styles/LoginScreenStyle'
 import globalStyles from '../theme/Styles'
 
 const RegisterScreen = ({ navigation }) => {
-  const { registerUser } = useAuth()
+  const { registerUser, logout, state: { error } } = useAuth()
 
   const [userData, setUserData] = useState({
     email: 'test1@123.fr',
@@ -17,6 +17,12 @@ const RegisterScreen = ({ navigation }) => {
   const handleSubmit = async () => {
     await registerUser(userData)
   }
+
+  const handleBack = () => {
+    logout()
+    navigation.goBack()
+  }
+
   return (
     <View style={styles.container}>
       <Text style={globalStyles.heading}>Créer un compte</Text>
@@ -25,7 +31,8 @@ const RegisterScreen = ({ navigation }) => {
         setUserData={setUserData}
         onSubmit={handleSubmit}
       />
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      {error && <Text style={globalStyles.error}>Une erreur s'est produite</Text>}
+      <TouchableOpacity onPress={handleBack}>
         <Text style={globalStyles.pressableLink}>J'ai déjà un compte</Text>
       </TouchableOpacity>
     </View>

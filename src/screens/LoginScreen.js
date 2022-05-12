@@ -13,7 +13,7 @@ const LoginScreen = ({ navigation }) => {
   const { loginUser, state: { error } } = useAuth()
 
   const [credentials, setCredentials] = useState({
-    identifier: 'tes5t@test.fr',
+    identifier: 'test@test.fr',
     password: 'testtest'
   })
 

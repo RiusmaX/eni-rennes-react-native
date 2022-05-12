@@ -1,10 +1,22 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View } from 'react-native'
+import RestaurantsList from '../components/list/RestaurantsList'
+import { getRestaurants } from '../services/Api'
 
 const RestaurantsScreen = () => {
+  const [restaurants, setRestaurants] = useState([])
+
+  useEffect(() => {
+    const getData = async () => {
+      const result = await getRestaurants()
+      setRestaurants(result)
+    }
+    getData()
+  }, [])
+
   return (
     <View>
-      <Text>RESTAURANTS SCREEN</Text>
+      <RestaurantsList restaurants={restaurants} />
     </View>
   )
 }
