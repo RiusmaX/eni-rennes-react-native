@@ -10,7 +10,7 @@ const RestaurantListItem = ({ item }) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate('RestaurantDetails', { id: item._id })}
+        navigation.navigate('RestaurantDetails', { id: item._id, name: item.title })}
     >
       <View style={styles.card}>
         <Image

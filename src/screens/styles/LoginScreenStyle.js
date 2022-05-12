@@ -6,7 +6,7 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   image: {
-    width: 100,
+    height: 100,
     resizeMode: 'contain',
     alignSelf: 'center'
   }

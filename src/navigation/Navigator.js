@@ -42,13 +42,22 @@ const RestaurantsNavigation = () => {
   return (
     <RestaurantsNavigator.Navigator
       initialRouteName='RestaurantsList'
-      screenOptions={{
-        headerShown: false
-      }}
     >
       <RestaurantsNavigator.Group>
-        <RestaurantsNavigator.Screen name='RestaurantsList' component={RestaurantsScreen} />
-        <RestaurantsNavigator.Screen name='RestaurantDetails' component={RestaurantDetailsScreen} />
+        <RestaurantsNavigator.Screen
+          name='RestaurantsList'
+          component={RestaurantsScreen}
+          options={{
+            title: 'Restaurants'
+          }}
+        />
+        <RestaurantsNavigator.Screen
+          options={{
+            title: 'Chargement...'
+          }}
+          name='RestaurantDetails'
+          component={RestaurantDetailsScreen}
+        />
       </RestaurantsNavigator.Group>
     </RestaurantsNavigator.Navigator>
   )
@@ -80,7 +89,12 @@ const MainNavigation = () => {
     >
       <TabNavigator.Group>
         <TabNavigator.Screen name='Home' component={HomeScreen} />
-        <TabNavigator.Screen name='Restaurants' component={RestaurantsNavigation} />
+        <TabNavigator.Screen
+          options={{
+            headerShown: false
+          }}
+          name='Restaurants' component={RestaurantsNavigation}
+        />
       </TabNavigator.Group>
     </TabNavigator.Navigator>
   )

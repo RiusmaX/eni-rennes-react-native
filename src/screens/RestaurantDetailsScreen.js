@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { View, ScrollView, Text, Image } from 'react-native'
+import { View, ScrollView, Text, Image, LogBox } from 'react-native'
+import PlatsList from '../components/list/PlatsList'
 import { getRestaurant } from '../services/Api'
 import globalStyles from '../theme/Styles'
 import LoadingScreen from './LoadingScreen'
@@ -12,9 +13,12 @@ const RestaurantDetailsScreen = ({ route, navigation }) => {
   const { id } = route.params
 
   useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
+
     const getData = async () => {
       const result = await getRestaurant(id)
       setRestaurant(result)
+      navigation.setOptions({ title: result.title })
     }
     getData()
   }, [])
@@ -25,11 +29,12 @@ const RestaurantDetailsScreen = ({ route, navigation }) => {
         <Text style={globalStyles.heading}>{restaurant.title}</Text>
         <Image style={styles.image} source={{ uri: `${IMAGE_URL}${restaurant.photos[0].url}` }} />
         <Text>{restaurant.description}</Text>
-        <View>
+        <View style={styles.address}>
           <Text>{`${restaurant.adresse?.adresse}, ${restaurant.adresse?.code_postal}, ${restaurant.adresse?.ville}`}</Text>
-          <Text>{restaurant.adresse?.code_postal}</Text>
-          <Text>{restaurant.adresse?.ville}</Text>
         </View>
+        <PlatsList
+          plats={restaurant.plats}
+        />
       </ScrollView>
     )
   } else {
