@@ -93,6 +93,8 @@ const RestaurantsNavigation = () => {
 
 // On créé notre navigateur avec nos écrans
 const MainNavigation = () => {
+  const { state: { cart } } = useCart()
+  const cartNbItems = cart.reduce((prev, cur) => prev + cur.quantity, 0)
   return (
     <TabNavigator.Navigator
       initialRouteName='Restaurants'
@@ -104,7 +106,11 @@ const MainNavigation = () => {
             backgroundColor='transparent'
             color='black'
             onPress={() => navigation.navigate('Cart')}
-          />
+          >
+            <View style={globalStyles.badge}>
+              <Text style={globalStyles.badgeText}>{cartNbItems}</Text>
+            </View>
+          </Icon.Button>
         ),
         tabBarIcon: ({ focused, color, size }) => {
           let iconName
