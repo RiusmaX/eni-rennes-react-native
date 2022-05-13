@@ -1,7 +1,10 @@
 import React from 'react'
 import { View, ScrollView, Text, Image, SafeAreaView, FlatList } from 'react-native'
+
+import Button from '../Button'
 import globalStyles from '../../theme/Styles'
 import styles from '../styles/ListStyle'
+import { useCart } from '../../contexts/CartContext'
 
 const IMAGE_URL = 'https://strapi.myidea.fr'
 
@@ -13,6 +16,7 @@ const categoriesTrad = {
 }
 
 const PlatListItem = ({ item }) => {
+  const { addToCart } = useCart()
   return (
     <View style={styles.card}>
       <Image
@@ -23,6 +27,12 @@ const PlatListItem = ({ item }) => {
         <Text style={styles.title}>{item.nom}</Text>
         <Text>{item.description}</Text>
         <Text>{item.price.toFixed(2)} €</Text>
+      </View>
+      <View style={styles.actions}>
+        <Button
+          title='Ajouter au panier'
+          onPress={() => addToCart(item)}
+        />
       </View>
     </View>
   )

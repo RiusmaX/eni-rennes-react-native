@@ -17,5 +17,23 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: 'red'
+  },
+  badge: {
+    // padding: 5,
+    position: 'absolute',
+    right: 5,
+    bottom: 2
+  },
+  badgeText: {
+    textAlign: 'center',
+    paddingHorizontal: 0,
+    backgroundColor: 'red',
+    height: 18,
+    minWidth: 0,
+    width: 18,
+    borderRadius: 9,
+    fontSize: 12,
+    color: 'white',
+    fontWeight: 'bold'
   }
 })

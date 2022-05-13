@@ -12,7 +12,7 @@ const CustomButton = (props) => {
       style={styles.button}
       onPress={onPress}
     >
-      <Text style={styles.text}>{title}</Text>
+      <Text textBreakStrategy='simple' style={styles.text}>{title}</Text>
     </Pressable>
   )
 }

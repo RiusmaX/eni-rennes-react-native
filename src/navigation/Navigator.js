@@ -1,4 +1,5 @@
 import React from 'react'
+import { View, Text } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -11,6 +12,9 @@ import RegisterScreen from '../screens/RegisterScreen'
 import { useAuth } from '../contexts/AuthContext'
 import LoadingScreen from '../screens/LoadingScreen'
 import RestaurantDetailsScreen from '../screens/RestaurantDetailsScreen'
+import CartScreen from '../screens/CartScreen'
+import { useCart } from '../contexts/CartContext'
+import globalStyles from '../theme/Styles'
 
 // On instancie la navigation par onglets
 const TabNavigator = createBottomTabNavigator()
@@ -39,9 +43,26 @@ const AuthNavigation = () => {
 }
 
 const RestaurantsNavigation = () => {
+  const { state: { cart } } = useCart()
+  const cartNbItems = cart.reduce((prev, cur) => prev + cur.quantity, 0)
   return (
     <RestaurantsNavigator.Navigator
       initialRouteName='RestaurantsList'
+      screenOptions={({ navigation }) => ({
+        headerRight: () => (
+          <Icon.Button
+            name='cart'
+            size={25}
+            backgroundColor='transparent'
+            color='black'
+            onPress={() => navigation.navigate('Cart')}
+          >
+            <View style={globalStyles.badge}>
+              <Text style={globalStyles.badgeText}>{cartNbItems}</Text>
+            </View>
+          </Icon.Button>
+        )
+      })}
     >
       <RestaurantsNavigator.Group>
         <RestaurantsNavigator.Screen
@@ -58,6 +79,13 @@ const RestaurantsNavigation = () => {
           name='RestaurantDetails'
           component={RestaurantDetailsScreen}
         />
+        <RestaurantsNavigator.Screen
+          name='Cart'
+          component={CartScreen}
+          options={{
+            headerRight: null
+          }}
+        />
       </RestaurantsNavigator.Group>
     </RestaurantsNavigator.Navigator>
   )
@@ -68,7 +96,16 @@ const MainNavigation = () => {
   return (
     <TabNavigator.Navigator
       initialRouteName='Restaurants'
-      screenOptions={({ route }) => ({
+      screenOptions={({ navigation, route }) => ({
+        headerRight: () => (
+          <Icon.Button
+            name='cart'
+            size={25}
+            backgroundColor='transparent'
+            color='black'
+            onPress={() => navigation.navigate('Cart')}
+          />
+        ),
         tabBarIcon: ({ focused, color, size }) => {
           let iconName
           switch (route.name) {
@@ -96,6 +133,7 @@ const MainNavigation = () => {
           name='Restaurants' component={RestaurantsNavigation}
         />
       </TabNavigator.Group>
+      <TabNavigator.Group />
     </TabNavigator.Navigator>
   )
 }

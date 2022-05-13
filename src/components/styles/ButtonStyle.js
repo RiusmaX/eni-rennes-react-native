@@ -14,6 +14,8 @@ export default StyleSheet.create({
     alignSelf: 'center'
   },
   text: {
+    alignSelf: 'stretch',
+    textAlign: 'center',
     fontSize: 18,
     lineHeight: 21,
     fontWeight: 'bold',
